@@ -267,7 +267,7 @@ export default {
 
     tl.to('.char', {
       y: 0,
-      delay: 0.2,
+      delay: 0.8,
       stagger: 0.09,
       duration: 0.5
     })
