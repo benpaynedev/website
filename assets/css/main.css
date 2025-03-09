@@ -5,34 +5,8 @@ html {
     scroll-behavior: smooth;
 }
 
-.font-display {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-}
-
-nav a.active { text-decoration: underline }
-/*
-section#about {
-    background-size:cover;
-    background: radial-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 1)), url('/circuit-board.svg') repeat;
-}
-*/
-
-#cta-heading {
-    transition: all ease-in-out 750ms;
-    transform: translateX(-75px);
+/* Shown when app is mounted */
+body {
     opacity: 0;
-}
-#cta-heading.in {
-    transform: translateX(0);
-    opacity: 1;
-}
-#cta-body {
-    transition: all ease-in-out 750ms;
-    transform: translateY(75px);
-    opacity: 0;
-}
-#cta-body.in {
-    transform: translateY(0);
-    opacity: 1;
+    transition: opacity 0.3s;
 }

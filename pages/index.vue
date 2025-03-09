@@ -35,7 +35,7 @@
     <div id="app" class="flex flex-col grow justify-between w-full min-h-screen">
       <!-- About -->
       <section id="about" class="flex flex-col grow justify-center items-center min-h-screen pt-14 bg-white">
-        <div class="max-w-[960px] px-[3%] lg:px-0">
+        <div id="cta" class="max-w-[960px] px-[3%] lg:px-0">
           <h1 id="cta-heading" class="mt-20 lg:mt-0 text-5xl/22 sm:text-6xl/22 text-blue-400">Hello!</h1>
           <div id="cta-body">
             <p class="text-xl/8 sm:text-3xl/11 mb-7">
@@ -162,11 +162,34 @@
   </div>
 </template>
 
+<style>
+  .font-display {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+  }
+
+  nav a.active { text-decoration: underline }
+
+  #cta-heading {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  #cta-heading .char {
+    transform: translateY(115px);
+  }
+
+  #cta-body {
+    opacity: 0;
+  }
+</style>
+
 <script type="module">
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import { useToast } from '@/components/ui/toast/use-toast'
+import { useToast } from '@/components/ui/toast/use-toast';
 import VerticalTimelineEntry from "~/components/VerticalTimelineEntry.vue";
 import {$fetch} from "ofetch";
+import { gsap } from "gsap";
+import SplitType from 'split-type';
 
 const { toast } = useToast();
 let config;
@@ -218,12 +241,16 @@ export default {
     config = useRuntimeConfig();
   },
   mounted() {
+    document.body.style.opacity = 1;
+
     let sections = document.getElementsByTagName("section");
 
     let sectionsObserver = new IntersectionObserver((entries) => {
       for (let entry of entries) {
         if (entry.isIntersecting) {
           this.currentPage = entry.target.id;
+
+          window.history.pushState({}, "", `/#${entry.target.id}`);
         }
       }
     }, {
@@ -234,11 +261,20 @@ export default {
       sectionsObserver.observe(sections[i]);
     }
 
-    let ctaHeading = document.getElementById('cta-heading');
-    ctaHeading.classList.add('in');
+    SplitType.create('#cta-heading', {types: 'chars'});
 
-    let ctaBody = document.getElementById('cta-body');
-    ctaBody.classList.add('in');
+    let tl = gsap.timeline();
+
+    tl.to('.char', {
+      y: 0,
+      stagger: 0.09,
+      duration: 0.5
+    })
+    .to('#cta-body', {
+      opacity: 1,
+      delay: 0.2,
+      duration: 0.75,
+    });
   }
 }
 </script>
