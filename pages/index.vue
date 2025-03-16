@@ -284,7 +284,7 @@ export default {
         if(e) {
           e.preventDefault();
         }
-        gsap.to(window, {scrollTo: {y: elem, autoKill: true}});
+        gsap.to(window, {scrollTo: {y: elem, autoKill: false}});
       }
     }
   },
