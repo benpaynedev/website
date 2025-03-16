@@ -120,8 +120,8 @@
           <h1 class="text-4xl text-slate-900 mb-10">Contact Me</h1>
           <div class="mb-5">
             <label for="name" class="block mb-2 text-sm/6 font-medium text-gray-900">Name</label>
-            <div class="relative rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-slate-600">
-              <Field type="text" name="name" id="name" class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+            <div class="relative w-full rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-slate-600">
+              <Field type="text" name="name" id="name" class="block w-full pl-4 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                      placeholder="John Smith" v-model="name" rules="name"
               />
               <ErrorMessage as="div" name="name" v-slot="{ message}">
@@ -132,8 +132,8 @@
 
           <div class="mb-5">
             <label for="email" class="block mb-2 text-sm/6 font-medium text-gray-900">Email</label>
-            <div class="relative rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-slate-600">
-              <Field type="email" name="email" id="email" class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
+            <div class="relative w-full rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-slate-600">
+              <Field type="email" name="email" id="email" class="block w-full pl-4 py-1.5 w-100 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
                      placeholder="john.smith@email.com" v-model="email" rules="email"
               />
               <ErrorMessage as="div" name="email" v-slot="{ message }">
