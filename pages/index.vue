@@ -10,22 +10,22 @@
       </div>
       <ul class="flex items-center">
         <li class="mx-1">
-          <a href="#about" class="px-2 lg:px-4 py-2"
-             :class="{active: currentPage === 'about'}"
+          <a href="#section-about" class="px-2 lg:px-4 py-2"
+             :class="{active: currentPage === 'section-about'}"
           >
             About
           </a>
         </li>
         <li class="mx-1">
-          <a href="#work" class="px-2 lg:px-4 py-2"
-             :class="{active: currentPage === 'work'}"
+          <a href="#section-work" class="px-2 lg:px-4 py-2"
+             :class="{active: currentPage === 'section-work'}"
           >
             Work
           </a>
         </li>
         <li class="mx-1">
-          <a href="#contact" class="px-2 lg:px-4 py-2"
-             :class="{active: currentPage === 'contact'}"
+          <a href="#section-contact" class="px-2 lg:px-4 py-2"
+             :class="{active: currentPage === 'section-contact'}"
           >
             Contact
           </a>
@@ -34,9 +34,9 @@
     </nav>
     <div id="app" class="flex flex-col grow justify-between w-full min-h-screen">
       <!-- About -->
-      <section id="about" class="flex flex-col grow justify-center items-center min-h-screen pt-14 bg-white">
-        <div id="cta" class="max-w-[960px] px-[3%] lg:px-0">
-          <h1 id="cta-heading" class="mt-20 lg:mt-0 text-5xl/22 sm:text-6xl/22 text-blue-400">Hello!</h1>
+      <section id="section-about" class="flex justify-center items-center min-h-screen pt-14 bg-white">
+        <div id="cta" class="max-w-[960px] px-[3%] lg:px-0 min-[1675px]:me-[2%]">
+          <h1 id="cta-heading" class="lg:mt-0 text-5xl/22 sm:text-6xl/22 text-blue-400 font-extrabold tracking-tight">Hello!</h1>
           <div id="cta-body">
             <p class="text-xl/8 sm:text-3xl/11 mb-7">
               I'm Ben, I'm a Senior Full Stack developer at <a href="http://home.nationalservicealliance.com" class="underline" target="_blank">National Service Alliance</a>
@@ -56,10 +56,11 @@
             </div>
           </div>
         </div>
+        <div id="cta-image" class="w-[600px] h-[600px] hidden min-[1675px]:block rounded-xl shadow-md"></div>
       </section>
 
       <!-- Work -->
-      <section id="work" class="flex flex-col grow justify-center items-center min-h-screen pt-14 bg-white">
+      <section id="section-work" class="flex flex-col grow justify-center items-center min-h-screen pt-14 bg-white">
         <div class="w-full max-w-2xl px-[3%] lg:px-0">
           <h1 class="text-4xl text-slate-900 mb-8 mt-12 sm:mt-4">Where I've Worked</h1>
           <!-- Northpointe -->
@@ -114,7 +115,7 @@
       </section>
 
       <!-- Contact -->
-      <section id="contact" class="flex flex-col grow justify-center items-center min-h-screen pt-14 bg-white">
+      <section id="section-contact" class="flex flex-col grow justify-center items-center min-h-screen pt-14 bg-white">
         <Form class="w-full max-w-2xl px-[3%] lg:px-0" @submit="onSubmit">
           <h1 class="text-4xl text-slate-900 mb-10">Contact Me</h1>
           <div class="mb-5">
@@ -163,11 +164,6 @@
 </template>
 
 <style>
-  .font-display {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-  }
-
   nav a.active { text-decoration: underline }
 
   #cta-heading {
@@ -181,6 +177,39 @@
   #cta-body {
     opacity: 0;
   }
+
+  #cta-image {
+    opacity: 0;
+    transform: translateX(50px);
+    background-image: linear-gradient(
+    45deg,
+    hsl(212deg 100% 66%) 0%,
+    hsl(213deg 100% 68%) 2%,
+    hsl(214deg 100% 70%) 4%,
+    hsl(215deg 100% 72%) 6%,
+    hsl(215deg 100% 74%) 9%,
+    hsl(216deg 100% 76%) 13%,
+    hsl(216deg 100% 77%) 17%,
+    hsl(217deg 100% 79%) 21%,
+    hsl(217deg 100% 80%) 26%,
+    hsl(218deg 100% 82%) 31%,
+    hsl(218deg 100% 83%) 37%,
+    hsl(219deg 100% 84%) 43%,
+    hsl(219deg 100% 86%) 49%,
+    hsl(219deg 100% 87%) 55%,
+    hsl(220deg 100% 88%) 61%,
+    hsl(220deg 100% 89%) 67%,
+    hsl(220deg 100% 91%) 73%,
+    hsl(221deg 100% 92%) 78%,
+    hsl(221deg 100% 93%) 82%,
+    hsl(221deg 100% 94%) 86%,
+    hsl(221deg 100% 95%) 90%,
+    hsl(222deg 100% 97%) 93%,
+    hsl(222deg 100% 98%) 96%,
+    hsl(222deg 100% 99%) 98%,
+    hsl(0deg 0% 100%) 100%
+  );
+  }
 </style>
 
 <script type="module">
@@ -189,6 +218,7 @@ import { useToast } from '@/components/ui/toast/use-toast';
 import VerticalTimelineEntry from "~/components/VerticalTimelineEntry.vue";
 import {$fetch} from "ofetch";
 import { gsap } from "gsap";
+import { ScrollToPlugin } from 'gsap/all';
 import SplitType from 'split-type';
 
 const { toast } = useToast();
@@ -235,10 +265,32 @@ export default {
         this.sending = false;
         resetForm();
       });
+    },
+    getSamePageAnchor: function(link){
+      if (
+          link.protocol !== window.location.protocol ||
+          link.host !== window.location.host ||
+          link.pathname !== window.location.pathname ||
+          link.search !== window.location.search
+      ) {
+        return false;
+      }
+
+      return link.hash;
+    },
+    scrollToHash: function(hash, e) {
+      const elem = hash ? document.querySelector(hash) : false;
+      if(elem) {
+        if(e) {
+          e.preventDefault();
+        }
+        gsap.to(window, {scrollTo: {y: elem, autoKill: true}});
+      }
     }
   },
   setup() {
     config = useRuntimeConfig();
+    gsap.registerPlugin(ScrollToPlugin)
   },
   mounted() {
     document.body.style.opacity = 1;
@@ -249,8 +301,6 @@ export default {
       for (let entry of entries) {
         if (entry.isIntersecting) {
           this.currentPage = entry.target.id;
-
-          window.history.pushState({}, "", `/#${entry.target.id}`);
         }
       }
     }, {
@@ -271,11 +321,22 @@ export default {
       stagger: 0.09,
       duration: 0.5
     })
-    .to('#cta-body', {
+    .to(['#cta-body', '#cta-image'], {
+      x: 0,
       opacity: 1,
       delay: 0.2,
       duration: 0.75,
     });
+
+    // If a link's href is within the current page, scroll to it instead
+    document.querySelectorAll('a[href]').forEach(a => {
+      a.addEventListener('click', e => {
+        this.scrollToHash(this.getSamePageAnchor(a), e);
+      });
+    });
+
+    // Scroll to the element in the URL's hash on load
+    this.scrollToHash(window.location.hash);
   }
 }
 </script>
