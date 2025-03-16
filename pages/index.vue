@@ -43,7 +43,7 @@
               with 12+ years experience creating responsive, high-performance web applications. I bring expertise in PHP,
               Laravel, Vue, JavaScript, and MySQL as well as AI and Data Engineering. I'm driven by learning new things
               and being challenged. If you'd like to chat click
-              <a href="#contact" class="underline">here</a>.
+              <a href="#section-contact" class="underline">here</a>.
             </p>
             <div>
               <a href="https://github.com/benpaynedev?tab=repositories" class="block h-[25px] w-[23px]" target="_blank">
