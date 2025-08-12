@@ -105,9 +105,13 @@
               <li class="mb-3">
                 Developed an AI classifier to better handle fuzzy customer responses to automated text messages.
               </li>
-              <li>
-                Created mission critical call routing software handling thousands of calls a month, allowing users to
+              <li class="mb-3">
+                Created mission critical call routing software handling hundreds of calls a month, allowing users to
                 distribute calls across a geographical area using geolocation mapping software.
+              </li>
+              <li>
+                Developed an AI powered IVR allowing servicers and customers to instantly get relavent information for
+                their repairs.
               </li>
             </ul>
           </VerticalTimelineEntry>
