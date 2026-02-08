@@ -51,7 +51,7 @@ const onSubmit = handleSubmit(values => {
 
     setTimeout(() => {
       sendButtonText.value = 'Send';
-    }, 2500);
+    }, 3000);
 
     setTimeout(() => {
       sent.value = false;
@@ -120,7 +120,6 @@ onMounted(() => {
       const target = document.querySelector(a.getAttribute('href') ?? '');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        currentPage.value = target.getAttribute('id') ?? '';
       }
     });
   });
@@ -315,14 +314,14 @@ onMounted(() => {
 <section class="contact-section" id="section-contact">
   <div class="reveal">
     <span class="section-label">Get in Touch</span>
-    <h2 class="section-title">Let's Build Something</h2>
+    <h2 class="section-title">Let's <span>Build</span> Something</h2>
   </div>
 
   <div class="contact-grid">
     <div class="reveal reveal-delay-1">
       <p class="contact-text">
         I'm always interested in hearing about <strong>new projects</strong> and <strong>opportunities</strong>.
-        Whether you have a question or just want to say hi, I'll do my best to get back to you.
+        Whether you have a question or just want to say hi, send me a note!
       </p>
       <div class="contact-links">
         <a href="https://github.com/benpaynedev?tab=repositories" target="_blank" class="contact-link magnetic">
@@ -342,7 +341,7 @@ onMounted(() => {
         <input type="text" name="name" id="name" placeholder="Your name" autocomplete="name"
                v-model="name" v-bind="nameAttrs"
         >
-        <p v-if="errorBag.name" class="absolute top-[55%] right-[2%] text-sm text-(--accent)">
+        <p v-if="errorBag.name">
           Please enter your name
         </p>
       </div>
@@ -351,7 +350,7 @@ onMounted(() => {
         <input type="email" name="email" id="email" placeholder="Your email" autocomplete="email"
                v-model="email" v-bind="emailAttrs"
         >
-        <p v-if="errorBag.email" class="absolute top-[55%] right-[2%] text-sm text-(--accent)">
+        <p v-if="errorBag.email">
           Please enter your email
         </p>
       </div>
@@ -360,17 +359,12 @@ onMounted(() => {
         <textarea name="message" id="message" placeholder="What's on your mind?"
                   v-model="message" v-bind="messageAttrs"
         ></textarea>
-        <p v-if="errorBag.message" class="absolute top-[26%] right-[2%] text-sm text-(--accent)">
+        <p v-if="errorBag.message">
           Please enter your message
         </p>
       </div>
       <button type="submit" class="btn btn-primary btn-submit magnetic" :class="{submitted: sent}" :disabled="sending" >
-        <span>
-          <span>S</span>
-          <span>e</span>
-          <span>n</span>
-          <span>d</span>
-        </span>
+        <span v-text="sendButtonText"></span>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
       </button>
     </form>

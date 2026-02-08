@@ -496,12 +496,40 @@ section { padding: 6rem 6vw; position: relative; }
 }
 .form-group textarea { resize: vertical; min-height: 120px; }
 
+.form-group input + p {
+    position: absolute;
+    top: 55%;
+    right: 2%;
+    font-size: 0.9rem;
+    color: var(--accent);
+    /*absolute top-[55%] right-[2%] text-sm text-(--accent)*/
+}
+
+.form-group textarea + p {
+    position: absolute;
+    top: 26%;
+    right: 2%;
+    font-size: 0.9rem;
+    color: var(--accent);
+    /*absolute top-[26%] right-[2%] text-sm text-(--accent)*/
+}
+
 .btn-submit {
     align-self: flex-start;
 }
 
 .btn-submit:disabled {
     pointer-events: none;
+}
+
+@keyframes slideRightSlideLeft {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+.btn-submit.submitted span {
+    animation: slideRightSlideLeft 3s ease forwards;
 }
 
 @keyframes slideRightFadeBack {
@@ -642,7 +670,20 @@ footer {
 
 /* ─── Responsive ─── */
 @media (max-width: 480px) {
-
+    .work-card li {
+        padding-left: 0;
+    }
+    .work-card li::before {
+        display: none;
+    }
+    .form-group input,
+    .form-group textarea { margin-bottom: 0.5rem }
+    .form-group input + p,
+    .form-group textarea + p {
+        position: unset;
+        top: unset;
+        right: unset;
+    }
 }
 
 @media (max-width: 768px) {
