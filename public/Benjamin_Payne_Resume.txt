@@ -1,0 +1,95 @@
+Benjamin Payne
+Senior Developer
+
+Grand Rapids, MI 49546
+6166342033
+me@benpayne.dev
+
+Professional Summary
+
+Highly skilled Senior Developer bringing 11 years of experience designing, developing and installing software programs, systems and applications. Proven project manager with background leading distributed teams in complex development projects.
+Experienced in building web applications using Linux, Apache, MySQL, PHP, HTML, CSS, and JavaScript, Laravel, Vue, jQuery, and Bootstrap.
+
+Work History
+
+November 2022 - Current
+
+National Service Alliance - Louisville, KY
+Senior Developer
+
+Modernized legacy monolith — 10k+ lines changed, upgrading PHP 5.3 → 8.4.
+Automated On Demand servicer onboarding, streamlining several hundred data entry points.
+Developed an AI classifier to handle fuzzy customer responses to automated text messages.
+Created mission-critical call routing software handling hundreds of calls/month using geolocation mapping.
+Developed an AI-powered IVR for instant servicer and customer information retrieval.
+
+September 2022 - November 2022
+
+AnswerNet - Willow Grove, PA
+Senior Developer
+
+Developed QA dashboard for internal staff to evaluate calls. This dashboard will handle 1000s of calls per day across over 20 clients.
+Delivered new 'lite' solution for Third Party Verification clients who needed custom designed systems to meet their demands.
+Evaluated and improved development work of other developers on team, working to provide training, constructive criticism and knowledge transfer.
+Designed updates to existing software to meet changing customer demands.
+Reviewed and incorporated latest technology innovations and development strategies to improve build speed, quality and end-user experience.
+
+January 2015 - September 2022
+
+Northpointe Bank - Grand Rapids, MI
+Senior Application Developer
+
+Developed digital banking onboarding platforms where customers can open new checking or savings accounts. This system annually onboards millions of dollars in retail banking applications.
+Developed Nintex RPA solutions that consume banking onboarding data and loads it into core banking systems. This automation freed up headcount and allowed business units to lower costs by several million dollars over 8 years.
+Developed Retail Lending origination platforms, that originate millions of dollars in applications each month.
+Developed B2B Correspondent Lending applications that facilitate purchases of millions of dollars in loans each month.
+Developed loan boarding applications that board millions of dollars in originated loans into loan servicing systems.
+Developed various sub systems, and backend applications that help facilitate marketing, accounting, capital markets, customer service, and loan servicing operations.
+Analyzed and developed technical solutions to meet business requirements.
+Developed standardized work processes, tools and methodologies to improve code quality and business profitability.
+Managed software development and support using formal specifications, data flow diagrams and other design techniques.
+Implemented consistent coding practices using industry standard style guides PEP8, and PSR-12.
+Deployed software using TeamCity CI/CD.
+Managed software using GitLab version control.
+
+December 2009 - January 2015
+
+USMC - Camp Lejeune, NC
+Squad Leader
+
+Lead squad of 13 Marines
+Conducted live fire exercises with millions of dollars in equipment
+Ensured maintenance and accountability of millions of dollars in equipment
+Deployed with the 22nd Marine Expeditionary Unit to the Persian Gulf
+
+Education
+
+January 2022 - June 2022
+Udacity Online
+Nanodegree Data Science
+
+Professional development completed in Data Science.
+Focus on technical writing, ETL pipelines, recommendation engines, machine learning, and software development.
+Used Python, Numpy, Scikit-Learn, Pandas, Flask, and Jupyter
+
+January 2019 - May 2021
+Davenport University Grand Rapids, MI
+Bachelor of Science Computer Science
+
+Focus on AI and Machine Learning
+Dean's List Fall 2019, Winter 2019, Spring/Summer 2020
+President's List Winter 2021
+
+Skills
+
+PHP
+
+JavaScript
+
+MySQL
+
+Laravel
+
+Vue
+
+AI/ML
