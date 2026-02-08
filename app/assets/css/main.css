@@ -12,12 +12,12 @@
     --accent-glow: #c4f55344;
     --border: #222233;
     --border-hover: #2a2a40;
+    --ui-bg: var(--bg-card);
+    --ui-border: var(--border);
     --font-display: 'Instrument Serif', Georgia, serif;
     --font-body: 'DM Sans', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 }
-
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 input:-webkit-autofill,
 textarea:-webkit-autofill,
@@ -498,6 +498,21 @@ section { padding: 6rem 6vw; position: relative; }
 
 .btn-submit {
     align-self: flex-start;
+}
+
+.btn-submit:disabled {
+    pointer-events: none;
+}
+
+@keyframes slideRightFadeBack {
+    0%   { opacity: 1; transform: translateX(0); }
+    30%  { opacity: 0; transform: translateX(30px); }
+    90%  { opacity: 0; transform: translateX(0); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+.btn-submit.submitted svg {
+    animation: slideRightFadeBack 3s ease forwards;
 }
 
 /* ─── Footer ─── */
