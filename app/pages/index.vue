@@ -321,7 +321,7 @@ onMounted(() => {
     <div class="reveal reveal-delay-1">
       <p class="contact-text">
         I'm always interested in hearing about <strong>new projects</strong> and <strong>opportunities</strong>.
-        Whether you have a question or just want to say hi, send me a note!
+        Whether you have a question or just want to say hi, send me a note and I'll get back to you!
       </p>
       <div class="contact-links">
         <a href="https://github.com/benpaynedev?tab=repositories" target="_blank" class="contact-link magnetic">
