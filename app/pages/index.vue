@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import { z } from 'zod';
@@ -23,6 +23,15 @@ let sending = ref(false);
 let sent = ref(false);
 let sendButtonText = ref('Send');
 let config = useRuntimeConfig();
+
+const displayedText = ref('Build');
+const cyclingWordRef = ref<HTMLElement | null>(null);
+const cyclingClasses = ref({
+  'is-deleting': false,
+  'is-typing': false,
+  'is-idle': false,
+});
+const cyclingTimers: ReturnType<typeof setTimeout>[] = [];
 
 let [name, nameAttrs] = defineField('name');
 let [email, emailAttrs] = defineField('email');
@@ -139,6 +148,74 @@ onMounted(() => {
       sectionObserver.observe(sections[i] ?? new Element);
     }
   }
+
+  // ─── Text cycling animation ───
+  const words = ['Build', 'Create', 'Design', 'Craft', 'Shape', 'Launch', 'Ship', 'Engineer'];
+  let wordIndex = 0;
+
+  function setCyclingClass(phase: string) {
+    cyclingClasses.value = {
+      'is-deleting': phase === 'deleting',
+      'is-typing': phase === 'typing',
+      'is-idle': phase === 'idle',
+    };
+  }
+
+  function delay(ms: number): Promise<void> {
+    return new Promise(resolve => {
+      const id = setTimeout(resolve, ms);
+      cyclingTimers.push(id);
+    });
+  }
+
+  async function cycleWords() {
+    while (true) {
+      const currentWord = words[wordIndex];
+
+      // Delete phase
+      setCyclingClass('deleting');
+      for (let i = currentWord.length; i >= 0; i--) {
+        displayedText.value = currentWord.slice(0, i);
+        await delay(80);
+      }
+
+      // Move to next word
+      wordIndex = (wordIndex + 1) % words.length;
+      const nextWord = words[wordIndex];
+
+      // Type phase
+      setCyclingClass('typing');
+      for (let i = 1; i <= nextWord.length; i++) {
+        displayedText.value = nextWord.slice(0, i);
+        await delay(100);
+      }
+
+      // Idle phase
+      setCyclingClass('idle');
+      await delay(5000);
+    }
+  }
+
+  const contactReveal = document.querySelector('#section-contact .reveal');
+  if (contactReveal) {
+    const cyclingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          cyclingObserver.disconnect();
+          // Wait for reveal animation to finish
+          const startId = setTimeout(() => {
+            cycleWords();
+          }, 5000);
+          cyclingTimers.push(startId);
+        }
+      });
+    }, { threshold: 0.15 });
+    cyclingObserver.observe(contactReveal);
+  }
+});
+
+onUnmounted(() => {
+  cyclingTimers.forEach(id => clearTimeout(id));
 });
 </script>
 
@@ -314,7 +391,8 @@ onMounted(() => {
 <section class="contact-section" id="section-contact">
   <div class="reveal">
     <span class="section-label">Get in Touch</span>
-    <h2 class="section-title">Let's <span>Build</span> Something</h2>
+    <h2 class="section-title">Let's <span class="cycling-word is-idle" ref="cyclingWordRef"
+        :class="cyclingClasses"><em>{{ displayedText }}</em></span> Something</h2>
   </div>
 
   <div class="contact-grid">

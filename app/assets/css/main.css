@@ -280,6 +280,44 @@ section { padding: 6rem 6vw; position: relative; }
     margin-bottom: 3rem;
 }
 
+/* ─── Cycling word animation ─── */
+.cycling-word {
+    position: relative;
+    display: inline-block;
+    min-width: 3ch;
+}
+
+.cycling-word::after {
+    content: '|';
+    color: var(--accent);
+    font-weight: 300;
+    opacity: 0;
+    animation: none;
+}
+
+.cycling-word.is-typing::after,
+.cycling-word.is-deleting::after {
+    opacity: 1;
+    animation: none;
+}
+
+.cycling-word.is-idle::after {
+    opacity: 1;
+    animation: cursorBlink 1.2s step-end infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cycling-word::after {
+        animation: none;
+        opacity: 0;
+    }
+}
+
 /* ─── Reveal animation ─── */
 .reveal {
     opacity: 0;
@@ -414,6 +452,11 @@ section { padding: 6rem 6vw; position: relative; }
 /* ─── Contact ─── */
 .contact-section {
     padding-bottom: 4rem;
+}
+
+.contact-section .section-title em {
+    font-style: italic;
+    color: var(--accent);
 }
 
 .contact-grid {
