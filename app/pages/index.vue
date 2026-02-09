@@ -172,22 +172,26 @@ onMounted(() => {
     while (true) {
       const currentWord = words[wordIndex];
 
-      // Delete phase
-      setCyclingClass('deleting');
-      for (let i = currentWord.length; i >= 0; i--) {
-        displayedText.value = currentWord.slice(0, i);
-        await delay(80);
+      if (currentWord !== undefined) {
+        // Delete phase
+        setCyclingClass('deleting');
+        for (let i = currentWord.length; i >= 0; i--) {
+          displayedText.value = currentWord.slice(0, i);
+          await delay(80);
+        }
       }
 
       // Move to next word
       wordIndex = (wordIndex + 1) % words.length;
       const nextWord = words[wordIndex];
 
-      // Type phase
-      setCyclingClass('typing');
-      for (let i = 1; i <= nextWord.length; i++) {
-        displayedText.value = nextWord.slice(0, i);
-        await delay(100);
+      if (nextWord !== undefined) {
+        // Type phase
+        setCyclingClass('typing');
+        for (let i = 1; i <= nextWord.length; i++) {
+          displayedText.value = nextWord.slice(0, i);
+          await delay(100);
+        }
       }
 
       // Idle phase
