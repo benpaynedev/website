@@ -250,6 +250,75 @@ onUnmounted(() => {
     <div class="shape shape-3"></div>
   </div>
 
+  <div class="tech-constellation" aria-hidden="true">
+    <svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- Connection lines (rendered first, behind nodes) -->
+      <line class="constellation-line" x1="100" y1="80" x2="220" y2="150" />
+      <line class="constellation-line" x1="220" y1="150" x2="350" y2="100" />
+      <line class="constellation-line" x1="220" y1="150" x2="180" y2="280" />
+      <line class="constellation-line" x1="350" y1="100" x2="400" y2="230" />
+      <line class="constellation-line" x1="180" y1="280" x2="320" y2="320" />
+      <line class="constellation-line" x1="400" y1="230" x2="320" y2="320" />
+      <line class="constellation-line" x1="320" y1="320" x2="250" y2="420" />
+      <line class="constellation-line" x1="180" y1="280" x2="80" y2="380" />
+      <line class="constellation-line" x1="80" y1="380" x2="250" y2="420" />
+      <line class="constellation-line" x1="250" y1="420" x2="400" y2="450" />
+      <line class="constellation-line" x1="400" y1="450" x2="350" y2="540" />
+      <line class="constellation-line" x1="250" y1="420" x2="350" y2="540" />
+      <line class="constellation-line" x1="100" y1="80" x2="180" y2="280" />
+      <line class="constellation-line" x1="350" y1="100" x2="320" y2="320" />
+      <line class="constellation-line" x1="80" y1="380" x2="150" y2="520" />
+      <line class="constellation-line" x1="150" y1="520" x2="350" y2="540" />
+      <line class="constellation-line" x1="400" y1="230" x2="400" y2="450" />
+
+      <!-- Nodes -->
+      <g class="constellation-node constellation-node-1">
+        <circle cx="100" cy="80" r="3" />
+        <text x="100" y="65">PHP</text>
+      </g>
+      <g class="constellation-node constellation-node-2">
+        <circle cx="220" cy="150" r="3" />
+        <text x="220" y="135">Laravel</text>
+      </g>
+      <g class="constellation-node constellation-node-3">
+        <circle cx="350" cy="100" r="3" />
+        <text x="350" y="85">Vue</text>
+      </g>
+      <g class="constellation-node constellation-node-4">
+        <circle cx="400" cy="230" r="3" />
+        <text x="400" y="215">JavaScript</text>
+      </g>
+      <g class="constellation-node constellation-node-5">
+        <circle cx="180" cy="280" r="3" />
+        <text x="180" y="265">MySQL</text>
+      </g>
+      <g class="constellation-node constellation-node-6">
+        <circle cx="320" cy="320" r="3" />
+        <text x="320" y="305">Go</text>
+      </g>
+      <g class="constellation-node constellation-node-7">
+        <circle cx="80" cy="380" r="3" />
+        <text x="80" y="365">MongoDB</text>
+      </g>
+      <g class="constellation-node constellation-node-8">
+        <circle cx="250" cy="420" r="3" />
+        <text x="250" y="405">AI &amp; ML</text>
+      </g>
+      <g class="constellation-node constellation-node-9">
+        <circle cx="400" cy="450" r="3" />
+        <text x="400" y="435">WordPress</text>
+      </g>
+      <g class="constellation-node constellation-node-10">
+        <circle cx="150" cy="520" r="3" />
+        <text x="150" y="505">Leaflet</text>
+      </g>
+      <g class="constellation-node constellation-node-11">
+        <circle cx="350" cy="540" r="3" />
+        <text x="350" y="525">Data Engineering</text>
+      </g>
+    </svg>
+  </div>
+
   <div class="hero-content">
     <div class="hero-greeting">// Hello, World</div>
 
