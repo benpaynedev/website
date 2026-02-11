@@ -473,7 +473,7 @@ onUnmounted(() => {
       <div class="reveal">
         <span class="section-label">Get in Touch</span>
         <h2 class="section-title">Let's <span class="cycling-word is-idle" ref="cyclingWordRef"
-            :class="cyclingClasses"><em>{{ displayedText }}</em></span> Something</h2>
+            :class="cyclingClasses"><em>{{ displayedText }}</em></span> <br class="max-[480px]:block hidden">Something</h2>
       </div>
       <div class="reveal reveal-delay-1">
         <p class="contact-text">
