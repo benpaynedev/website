@@ -462,9 +462,15 @@ section { padding: 6rem 6vw; position: relative; }
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    max-width: 1000px;
+    gap: 6rem;
+    max-width: 1280px;
     align-items: start;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .contact-text {
