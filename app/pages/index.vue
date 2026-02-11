@@ -404,11 +404,12 @@ onUnmounted(() => {
       <div class="work-card">
         <h3>National Service Alliance</h3>
         <div class="tech-tags">
-          <span class="tech-tag">PHP</span>
-          <span class="tech-tag">Go</span>
-          <span class="tech-tag">MySQL</span>
-          <span class="tech-tag">AI</span>
+          <span class="tech-tag">LAMP</span>
+          <span class="tech-tag">jQuery</span>
+          <span class="tech-tag">Bootstrap</span>
           <span class="tech-tag">Leaflet</span>
+          <span class="tech-tag">Go</span>
+          <span class="tech-tag">AI</span>
         </div>
         <ul>
           <li>Modernized legacy monolith — 10k+ lines changed, upgrading PHP 5.3 → 8.4.</li>
@@ -427,8 +428,11 @@ onUnmounted(() => {
       <div class="work-card">
         <h3>AnswerNet TPV</h3>
         <div class="tech-tags">
+          <span class="tech-tag">LAMP</span>
           <span class="tech-tag">Laravel</span>
           <span class="tech-tag">Vue</span>
+          <span class="tech-tag">jQuery</span>
+          <span class="tech-tag">Bootstrap</span>
           <span class="tech-tag">MongoDB</span>
         </div>
         <ul>
@@ -445,9 +449,11 @@ onUnmounted(() => {
       <div class="work-card">
         <h3>Northpointe Bank</h3>
         <div class="tech-tags">
+          <span class="tech-tag">LAMP</span>
           <span class="tech-tag">Laravel</span>
           <span class="tech-tag">Vue</span>
-          <span class="tech-tag">WordPress</span>
+          <span class="tech-tag">jQuery</span>
+          <span class="tech-tag">Bootstrap</span>
         </div>
         <ul>
           <li>Built custom customer onboarding software handling millions of dollars in transactions yearly.</li>

@@ -22,6 +22,9 @@ Automated On Demand servicer onboarding, streamlining several hundred data entry
 Developed an AI classifier to handle fuzzy customer responses to automated text messages.
 Created mission-critical call routing software handling hundreds of calls/month using geolocation mapping.
 Developed an AI-powered IVR for instant servicer and customer information retrieval.
+Deployed software using GitHub actions CI/CD.
+Managed software using GitHub version control.
+Implemented consistent coding practices using PEP8 and PSR-12 style guides.
 
 September 2022 - November 2022
 
@@ -33,6 +36,9 @@ Delivered new 'lite' solution for Third Party Verification clients who needed cu
 Evaluated and improved development work of other developers on team, working to provide training, constructive criticism and knowledge transfer.
 Designed updates to existing software to meet changing customer demands.
 Reviewed and incorporated latest technology innovations and development strategies to improve build speed, quality and end-user experience.
+Deployed software using GitHub actions CI/CD.
+Managed software using GitHub version control.
+Implemented consistent coding practices using PEP8 and PSR-12 style guides.
 
 January 2015 - September 2022
 
