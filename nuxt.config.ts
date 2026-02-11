@@ -1,6 +1,13 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-02-07',
-  modules: ['@nuxt/ui'],
+  modules: [
+      '@nuxt/ui',
+      '@nuxtjs/ngrok'
+  ],
+  ngrok: {
+    authtoken: process.env.NGROK_AUTH_TOKEN || '',
+    schemes: ['http']
+  },
   css: ['~/assets/css/main.css'],
   ssr: true,
   runtimeConfig: {

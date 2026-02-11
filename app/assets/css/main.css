@@ -713,10 +713,25 @@ footer {
 
 /* ─── Responsive ─── */
 @media (max-width: 480px) {
+    .work-card {
+        padding: 1.25rem;
+    }
     .work-card li {
         padding-left: 0;
     }
     .work-card li::before {
+        display: none;
+    }
+    .tech-tags {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+        padding: 0 1.25rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .tech-tags::-webkit-scrollbar {
         display: none;
     }
     .form-group input,
