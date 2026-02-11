@@ -126,7 +126,14 @@ onMounted(() => {
   document.querySelectorAll<HTMLElement>('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
       e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href') ?? '');
+      const href = a.getAttribute('href') ?? '';
+      if (a.getAttribute('class')?.toLowerCase() === 'nav-logo') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        return;
+      }
+
+      const target = document.querySelector(href);
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }

@@ -33,6 +33,10 @@ Copy `.env.example` and fill in:
 - `MAILGUN_API_KEY` — Mailgun API key for contact form
 - `WEBMASTER_EMAIL` — Recipient email address
 
+## Code Style
+
+- **No inline event handlers in templates** — All DOM event listeners and click handlers must be registered in `onMounted()` (and cleaned up in `onUnmounted()` if needed), not as inline `@click` or `v-on` directives in the template. This keeps logic centralized in the script block.
+
 ## Key Conventions
 
 - CSS custom properties define the color scheme; change them in `main.css` under `:root`
