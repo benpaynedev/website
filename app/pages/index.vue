@@ -19,6 +19,7 @@ const { defineField, errorBag, handleSubmit, resetForm } = useForm({
 });
 
 let currentPage = ref('');
+let isNavScrolling = ref(false);
 let sending = ref(false);
 let sent = ref(false);
 let sendButtonText = ref('Send');
@@ -32,6 +33,7 @@ const cyclingClasses = ref({
   'is-idle': false,
 });
 const cyclingTimers: ReturnType<typeof setTimeout>[] = [];
+let scrollEndCleanup: (() => void) | null = null;
 
 let [name, nameAttrs] = defineField('name');
 let [email, emailAttrs] = defineField('email');
@@ -122,12 +124,48 @@ onMounted(() => {
     });
   });
 
+  // ─── Scroll-end detection for nav scrolling ───
+  function waitForScrollEnd() {
+    if (scrollEndCleanup) {
+      scrollEndCleanup();
+      scrollEndCleanup = null;
+    }
+
+    const done = () => {
+      isNavScrolling.value = false;
+      if (scrollEndCleanup) {
+        scrollEndCleanup();
+        scrollEndCleanup = null;
+      }
+    };
+
+    if ('onscrollend' in window) {
+      const handler = () => done();
+      window.addEventListener('scrollend', handler, { once: true });
+      scrollEndCleanup = () => window.removeEventListener('scrollend', handler);
+    } else {
+      let timer: ReturnType<typeof setTimeout>;
+      const handler = () => {
+        clearTimeout(timer);
+        timer = setTimeout(done, 150);
+      };
+      window.addEventListener('scroll', handler);
+      scrollEndCleanup = () => {
+        clearTimeout(timer);
+        window.removeEventListener('scroll', handler);
+      };
+    }
+  }
+
   // ─── Smooth anchor scrolling ───
   document.querySelectorAll<HTMLElement>('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
       e.preventDefault();
       const href = a.getAttribute('href') ?? '';
       if (a.getAttribute('class')?.toLowerCase() === 'nav-logo') {
+        isNavScrolling.value = true;
+        currentPage.value = '';
+        waitForScrollEnd();
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
         return;
@@ -135,6 +173,9 @@ onMounted(() => {
 
       const target = document.querySelector(href);
       if (target) {
+        isNavScrolling.value = true;
+        currentPage.value = target.id ?? '';
+        waitForScrollEnd();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
@@ -143,6 +184,7 @@ onMounted(() => {
   // ---- Highlight current nav item tied to current section ----
   let sections = document.getElementsByTagName('section');
   let sectionObserver = new IntersectionObserver((entries) => {
+    if (isNavScrolling.value) return;
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         currentPage.value = entry.target.id ?? '';
@@ -227,6 +269,10 @@ onMounted(() => {
 
 onUnmounted(() => {
   cyclingTimers.forEach(id => clearTimeout(id));
+  if (scrollEndCleanup) {
+    scrollEndCleanup();
+    scrollEndCleanup = null;
+  }
 });
 </script>
 
