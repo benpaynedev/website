@@ -34,6 +34,8 @@ const cyclingClasses = ref({
 });
 const cyclingTimers: ReturnType<typeof setTimeout>[] = [];
 let scrollEndCleanup: (() => void) | null = null;
+const resumeModalOpen = ref(false);
+const openResumeModal = () => { resumeModalOpen.value = true; };
 
 function downloadPlainTextResume() {
   const a = document.createElement('a');
@@ -43,19 +45,6 @@ function downloadPlainTextResume() {
   a.click();
   document.body.removeChild(a);
 }
-
-const resumeMenuItems = [
-  {
-    label: 'View PDF',
-    to: '/Benjamin_Payne_Resume.pdf',
-    target: '_blank',
-  },
-  {
-    label: 'Download for HR Software',
-    description: 'ATS-friendly format for Workday, Greenhouse, Lever, iCIMS, Taleo, etc.',
-    onSelect: downloadPlainTextResume,
-  },
-];
 
 let [name, nameAttrs] = defineField('name');
 let [email, emailAttrs] = defineField('email');
@@ -271,6 +260,11 @@ onMounted(() => {
     }
   }
 
+  // ─── Resume modal buttons ───
+  document.querySelectorAll('[data-resume-modal]').forEach(btn => {
+    btn.addEventListener('click', openResumeModal);
+  });
+
   const contactReveal = document.querySelector('#section-contact .reveal');
   if (contactReveal) {
     const cyclingObserver = new IntersectionObserver((entries) => {
@@ -295,11 +289,66 @@ onUnmounted(() => {
     scrollEndCleanup();
     scrollEndCleanup = null;
   }
+  document.querySelectorAll('[data-resume-modal]').forEach(btn => {
+    btn.removeEventListener('click', openResumeModal);
+  });
 });
 </script>
 
 <style scoped>
+.resume-modal-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
+.resume-modal-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  text-align: left;
+  width: 100%;
+  font-family: var(--font-body);
+}
+
+.resume-modal-option:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+}
+
+.resume-modal-option-icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.resume-modal-option-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.resume-modal-option-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.resume-modal-option-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
 </style>
 
 <template>
@@ -424,13 +473,10 @@ onUnmounted(() => {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         GitHub
       </a>
-      <UDropdownMenu :items="resumeMenuItems">
-        <button type="button" class="btn btn-secondary magnetic">
+      <button type="button" class="btn btn-secondary magnetic" data-resume-modal>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
           Resume
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3 opacity-60"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
         </button>
-      </UDropdownMenu>
     </div>
   </div>
 
@@ -563,13 +609,10 @@ onUnmounted(() => {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             GitHub
           </a>
-          <UDropdownMenu :items="resumeMenuItems">
-            <button type="button" class="contact-link magnetic">
+          <button type="button" class="contact-link magnetic" data-resume-modal>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
               Resume
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-3 opacity-60"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
             </button>
-          </UDropdownMenu>
         </div>
       </div>
     </div>
@@ -614,4 +657,30 @@ onUnmounted(() => {
 <footer>
   <span id="copyright">© <NuxtTime :datetime="Date.now()" year="numeric" /> Ben Payne</span>
 </footer>
+
+<!-- Resume Modal -->
+<UModal v-model:open="resumeModalOpen" title="Resume" description="Choose a format to view or download.">
+  <template #body>
+    <div class="resume-modal-options">
+      <a href="/Benjamin_Payne_Resume.pdf" target="_blank" class="resume-modal-option" @click="resumeModalOpen = false">
+        <div class="resume-modal-option-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+        </div>
+        <div>
+          <div class="resume-modal-option-title">View PDF</div>
+          <div class="resume-modal-option-desc">Opens in a new tab</div>
+        </div>
+      </a>
+      <button type="button" class="resume-modal-option" @click="downloadPlainTextResume(); resumeModalOpen = false">
+        <div class="resume-modal-option-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+        </div>
+        <div>
+          <div class="resume-modal-option-title">Download for HR Software</div>
+          <div class="resume-modal-option-desc">ATS-friendly format for Workday, Greenhouse, Lever, iCIMS, Taleo, etc.</div>
+        </div>
+      </button>
+    </div>
+  </template>
+</UModal>
 </template>
