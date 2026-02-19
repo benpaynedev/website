@@ -7,7 +7,7 @@ me@benpayne.dev
 
 Professional Summary
 
-Highly skilled Senior Developer bringing 11 years of experience designing, developing and installing software programs, systems and applications. Proven project manager with background leading distributed teams in complex development projects.
+Highly skilled Senior Developer bringing 15+ years of experience designing, developing and installing software programs, systems and applications. Proven project manager with background leading distributed teams in complex development projects.
 Experienced in building web applications using Linux, Apache, MySQL, PHP, HTML, CSS, and JavaScript, Laravel, Vue, jQuery, and Bootstrap.
 
 Work History
