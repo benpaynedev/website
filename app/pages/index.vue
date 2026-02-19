@@ -192,7 +192,7 @@ onMounted(() => {
     });
   });
 
-  // ---- Highlight current nav item tied to current section ----
+  // ─── Highlight current nav item tied to current section ───
   let sections = document.getElementsByTagName('section');
   let sectionObserver = new IntersectionObserver((entries) => {
     if (isNavScrolling.value) return;
@@ -256,7 +256,7 @@ onMounted(() => {
 
       // Idle phase
       setCyclingClass('idle');
-      await delay(5000);
+      await delay(3000);
     }
   }
 
@@ -274,7 +274,7 @@ onMounted(() => {
           // Wait for reveal animation to finish
           const startId = setTimeout(() => {
             cycleWords();
-          }, 5000);
+          }, 3000);
           cyclingTimers.push(startId);
         }
       });
