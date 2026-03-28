@@ -57,14 +57,14 @@ const onSubmit = handleSubmit(values => {
   const formData = new FormData()
 
   formData.append('from', `${values.name} <${values.email}>`);
-  formData.append('to', `${config.public.WEBMASTER_EMAIL}`);
+  formData.append('to', `${config.WEBMASTER_EMAIL}`);
   formData.append('subject', `Website message from ${values.name}`);
   formData.append('text', `${values.message}`);
 
   $fetch("https://api.mailgun.net/v3/mail.benpayne.dev/messages", {
     method: "POST",
     headers: {
-      "Authorization": "Basic " + btoa(`api:${config.public.MAILGUN_API_KEY}`)
+      "Authorization": "Basic " + btoa(`api:${config.MAILGUN_API_KEY}`)
     },
     body: formData,
   }).then(() => {
