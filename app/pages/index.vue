@@ -23,7 +23,6 @@ let isNavScrolling = ref(false);
 let sending = ref(false);
 let sent = ref(false);
 let sendButtonText = ref('Send');
-let config = useRuntimeConfig();
 
 const displayedText = ref('Build');
 const cyclingWordRef = ref<HTMLElement | null>(null);
@@ -50,37 +49,28 @@ let [name, nameAttrs] = defineField('name');
 let [email, emailAttrs] = defineField('email');
 let [message, messageAttrs] = defineField('message');
 
-const onSubmit = handleSubmit(values => {
+const onSubmit = handleSubmit(async values => {
   sending.value = true;
   sendButtonText.value = 'Sending...';
 
-  const formData = new FormData()
-
-  formData.append('from', `${values.name} <${values.email}>`);
-  formData.append('to', `${config.public.WEBMASTER_EMAIL}`);
-  formData.append('subject', `Website message from ${values.name}`);
-  formData.append('text', `${values.message}`);
-
-  $fetch("https://api.mailgun.net/v3/mail.benpayne.dev/messages", {
-    method: "POST",
-    headers: {
-      "Authorization": "Basic " + btoa(`api:${config.public.MAILGUN_API_KEY}`)
-    },
-    body: formData,
-  }).then(() => {
-    sent.value = true;
-    sendButtonText.value = 'Sent!';
-
-    setTimeout(() => {
-      sendButtonText.value = 'Send';
-    }, 3000);
-
-    setTimeout(() => {
-      sent.value = false;
-      sending.value = false;
-    }, 5000);
-    resetForm();
+  await $fetch('/api/emails', {
+    method: 'POST',
+    body: { name: values.name, email: values.email, message: values.message },
   });
+
+  sent.value = true;
+  sendButtonText.value = 'Sent!';
+
+  setTimeout(() => {
+    sendButtonText.value = 'Send';
+  }, 3000);
+
+  setTimeout(() => {
+    sent.value = false;
+    sending.value = false;
+  }, 5000);
+
+  resetForm();
 });
 
 onMounted(() => {
