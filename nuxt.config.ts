@@ -10,10 +10,12 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/main.css'],
   ssr: true,
+  nitro: {
+    preset: 'vercel'
+  },
   runtimeConfig: {
     MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
     WEBMASTER_EMAIL: process.env.WEBMASTER_EMAIL,
-    apiSecret: '123'
   },
   app: {
     head: {
@@ -23,4 +25,9 @@ export default defineNuxtConfig({
       }
     },
   },
+  vite: {
+    build: {
+      sourcemap: false
+    }
+  }
 })
