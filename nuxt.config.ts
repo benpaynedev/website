@@ -2,7 +2,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-02-07',
   modules: [
       '@nuxt/ui',
-      '@nuxtjs/ngrok'
+      '@nuxtjs/ngrok',
+      '@vercel/speed-insights',
+      '@vercel/analytics'
   ],
   ngrok: {
     authtoken: process.env.NGROK_AUTH_TOKEN || '',
