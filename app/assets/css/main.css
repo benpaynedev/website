@@ -151,9 +151,7 @@ nav.scrolled { border-bottom-color: var(--border); }
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.8s ease 0.2s forwards;
+    animation: slideUpTransform 0.6s ease forwards;
 }
 
 .hero-name {
@@ -163,15 +161,12 @@ nav.scrolled { border-bottom-color: var(--border); }
     letter-spacing: -0.03em;
     color: var(--text);
     margin-bottom: 0.5rem;
-    overflow: hidden;
 }
 .hero-name .line {
     display: block;
-    opacity: 0;
-    transform: translateY(100%);
-    animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: slideUpTransform 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.hero-name .line:nth-child(2) { animation-delay: 0.15s; }
+.hero-name .line:nth-child(2) { animation-delay: 0.1s; }
 .hero-name em {
     font-style: italic;
     color: var(--accent);
@@ -794,6 +789,10 @@ footer {
 }
 @keyframes slideUp {
     to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUpTransform {
+    from { transform: translateY(24px); }
+    to { transform: translateY(0); }
 }
 @keyframes scrollPulse {
     0%, 100% { opacity: 0.3; transform: scaleY(1); }
