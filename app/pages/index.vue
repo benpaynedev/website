@@ -180,11 +180,13 @@ onMounted(() => {
     a.addEventListener('click', (e) => {
       e.preventDefault();
       const href = a.getAttribute('href') ?? '';
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const scrollBehavior: ScrollBehavior = isMobile ? 'instant' : 'smooth';
       if (a.getAttribute('class')?.toLowerCase() === 'nav-logo') {
         isNavScrolling.value = true;
         currentPage.value = '';
         waitForScrollEnd();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: scrollBehavior });
 
         return;
       }
@@ -194,7 +196,7 @@ onMounted(() => {
         isNavScrolling.value = true;
         currentPage.value = target.id ?? '';
         waitForScrollEnd();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
       }
     });
   });
