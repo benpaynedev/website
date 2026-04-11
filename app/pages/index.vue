@@ -180,11 +180,13 @@ onMounted(() => {
     a.addEventListener('click', (e) => {
       e.preventDefault();
       const href = a.getAttribute('href') ?? '';
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
+      const scrollBehavior: ScrollBehavior = isMobile ? 'instant' : 'smooth';
       if (a.getAttribute('class')?.toLowerCase() === 'nav-logo') {
         isNavScrolling.value = true;
         currentPage.value = '';
         waitForScrollEnd();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: scrollBehavior });
 
         return;
       }
@@ -194,7 +196,7 @@ onMounted(() => {
         isNavScrolling.value = true;
         currentPage.value = target.id ?? '';
         waitForScrollEnd();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
       }
     });
   });
@@ -266,6 +268,28 @@ onMounted(() => {
       await delay(3000);
     }
   }
+
+  // ─── Mobile hamburger menu ───
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+  function openMobileMenu() {
+    mobileMenu?.classList.add('open');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileMenu() {
+    mobileMenu?.classList.remove('open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger?.addEventListener('click', openMobileMenu);
+  mobileMenuClose?.addEventListener('click', closeMobileMenu);
+  mobileMenu?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', closeMobileMenu);
+  });
 
   // ─── Resume modal buttons ───
   document.querySelectorAll('[data-resume-modal]').forEach(btn => {
@@ -371,7 +395,23 @@ onUnmounted(() => {
     <li><a href="#section-projects" :class="{current: currentPage === 'section-projects'}">Projects</a></li>
     <li><a href="#section-contact" :class="{current: currentPage === 'section-contact'}">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <UIcon name="i-heroicons-bars-2" />
+  </button>
 </nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu">
+  <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+    <UIcon name="i-heroicons-x-mark" />
+  </button>
+  <ul class="mobile-menu-links">
+    <li><a href="#section-about">About</a></li>
+    <li><a href="#section-work">Work</a></li>
+    <li><a href="#section-projects">Projects</a></li>
+    <li><a href="#section-contact">Contact</a></li>
+  </ul>
+</div>
 
 <!-- Hero -->
 <section class="hero" id="section-about">

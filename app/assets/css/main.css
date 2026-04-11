@@ -121,6 +121,66 @@ nav.scrolled { border-bottom-color: var(--border); }
 .nav-links a.current::after
 { width: 100%; }
 
+/* ─── Hamburger button (hidden on desktop) ─── */
+.nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* ─── Mobile menu overlay ─── */
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+.mobile-menu.open {
+    opacity: 1;
+    pointer-events: all;
+}
+.mobile-menu-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.75rem;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+.mobile-menu-close:hover { color: var(--text); }
+.mobile-menu-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+}
+.mobile-menu-links a {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    transition: color 0.2s ease;
+}
+.mobile-menu-links a:hover { color: var(--accent); }
+
 /* ─── Hero ─── */
 .hero {
     min-height: 100vh;
@@ -151,9 +211,7 @@ nav.scrolled { border-bottom-color: var(--border); }
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.8s ease 0.2s forwards;
+    animation: slideUpTransform 0.6s ease forwards;
 }
 
 .hero-name {
@@ -163,15 +221,12 @@ nav.scrolled { border-bottom-color: var(--border); }
     letter-spacing: -0.03em;
     color: var(--text);
     margin-bottom: 0.5rem;
-    overflow: hidden;
 }
 .hero-name .line {
     display: block;
-    opacity: 0;
-    transform: translateY(100%);
-    animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: slideUpTransform 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.hero-name .line:nth-child(2) { animation-delay: 0.15s; }
+.hero-name .line:nth-child(2) { animation-delay: 0.1s; }
 .hero-name em {
     font-style: italic;
     color: var(--accent);
@@ -795,6 +850,10 @@ footer {
 @keyframes slideUp {
     to { opacity: 1; transform: translateY(0); }
 }
+@keyframes slideUpTransform {
+    from { transform: translateY(24px); }
+    to { transform: translateY(0); }
+}
 @keyframes scrollPulse {
     0%, 100% { opacity: 0.3; transform: scaleY(1); }
     50% { opacity: 1; transform: scaleY(1.2); }
@@ -928,8 +987,8 @@ footer {
 
 @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.25rem; }
-    .nav-links a { font-size: 0.75rem; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; align-items: center; }
     section { padding: 4rem 1.5rem; }
     .hero { padding: 6rem 1.5rem 4rem; }
     .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
