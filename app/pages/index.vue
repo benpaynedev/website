@@ -33,6 +33,23 @@ const cyclingClasses = ref({
 });
 const cyclingTimers: ReturnType<typeof setTimeout>[] = [];
 let scrollEndCleanup: (() => void) | null = null;
+
+// ─── Projects data ───
+interface Project {
+  title: string;
+  description: string;
+  stack: string[];
+  url: string;
+}
+
+const projects: Project[] = [
+  {
+    title: 'APY Calculator',
+    description: 'A compound interest simulator for modeling investment growth. Configure initial deposits, monthly contributions, APY rates, and compare multiple scenarios side-by-side with year-by-year breakdowns and CSV export.',
+    stack: ['React 19', 'Vite', 'Recharts'],
+    url: 'https://calculator.benpayne.dev/',
+  },
+];
 const resumeModalOpen = ref(false);
 const openResumeModal = () => { resumeModalOpen.value = true; };
 
@@ -351,6 +368,7 @@ onUnmounted(() => {
   <ul class="nav-links">
     <li><a href="#section-about" :class="{current: currentPage === 'section-about'}">About</a></li>
     <li><a href="#section-work" :class="{current: currentPage === 'section-work'}">Work</a></li>
+    <li><a href="#section-projects" :class="{current: currentPage === 'section-projects'}">Projects</a></li>
     <li><a href="#section-contact" :class="{current: currentPage === 'section-contact'}">Contact</a></li>
   </ul>
 </nav>
@@ -577,6 +595,60 @@ onUnmounted(() => {
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects-section" id="section-projects">
+  <div class="reveal">
+    <span class="section-label">Side Projects</span>
+    <h2 class="section-title">Things I've Built</h2>
+  </div>
+
+  <div class="projects-grid">
+    <article
+      v-for="(project, index) in projects"
+      :key="project.url"
+      class="project-card reveal"
+      :class="`delay-${index + 1}`"
+    >
+      <div class="project-preview">
+        <div class="project-preview-chrome">
+          <div class="preview-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="preview-url">{{ project.url.replace('https://', '') }}</span>
+        </div>
+        <div class="project-preview-viewport">
+          <iframe
+            :src="project.url"
+            :title="`${project.title} preview`"
+            loading="lazy"
+            tabindex="-1"
+          ></iframe>
+        </div>
+      </div>
+      <div class="project-card-body">
+        <h3 class="project-card-title">{{ project.title }}</h3>
+        <p class="project-card-desc">{{ project.description }}</p>
+        <div class="tech-tags">
+          <span v-for="tag in project.stack" :key="tag" class="tech-tag">{{ tag }}</span>
+        </div>
+      </div>
+      <div class="project-card-footer">
+        <a
+          :href="project.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="project-visit-link"
+        >
+          Visit Project
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+    </article>
   </div>
 </section>
 
