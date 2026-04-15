@@ -19,6 +19,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     MAILGUN_API_KEY: process.env.MAILGUN_API_KEY,
     WEBMASTER_EMAIL: process.env.WEBMASTER_EMAIL,
+    BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
+    DOWNLOAD_PASSWORDS: process.env.DOWNLOAD_PASSWORDS,
   },
   app: {
     head: {
