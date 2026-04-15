@@ -15,6 +15,7 @@
     "@vee-validate/rules": "^4.15.1",
     "@vee-validate/zod": "^4.15.1",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/blob": "^2.3.3",
     "@vercel/speed-insights": "^2.0.0",
     "nuxt": "^4.3.0",
     "tailwindcss": "^4.1.18",
